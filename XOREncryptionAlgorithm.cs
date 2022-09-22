@@ -34,19 +34,19 @@ namespace CryptoApp
 
             return DecryptedMessage;
         }
-        public override string Decryption(string CryptedMessage, string[] KeyValues)
-        {
-            string DecryptedMessage = "";
+        //public override string Decryption(string CryptedMessage, string[] KeyValues)
+        //{
+        //    string DecryptedMessage = "";
 
-            string keyValue = KeyValueGeneration(KeyValues[0], CryptedMessage.Length);
+        //    string keyValue = KeyValueGeneration(KeyValues[0], CryptedMessage.Length);
 
-            for (int i = 0; i < CryptedMessage.Length; i++)
-            {
-                DecryptedMessage += char.ToString((char)(CryptedMessage[i] ^ keyValue[i]));
-            }
+        //    for (int i = 0; i < CryptedMessage.Length; i++)
+        //    {
+        //        DecryptedMessage += char.ToString((char)(CryptedMessage[i] ^ keyValue[i]));
+        //    }
 
-            return DecryptedMessage;
-        }
+        //    return DecryptedMessage;
+        //}
 
         public override string Encryption(string SourceMessage, string[] KeyValues)
         {

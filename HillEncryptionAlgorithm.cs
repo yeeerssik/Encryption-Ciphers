@@ -102,10 +102,10 @@ namespace CryptoApp
         }
 
 
-        public override string Decryption(string CryptedMessage, string[] KeyValues)
-        {
-            throw new NotImplementedException();
-        }
+        //public override string Decryption(string CryptedMessage, string[] KeyValues)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         public override string Encryption(string SourceMessage, string[] KeyValues)
         {
