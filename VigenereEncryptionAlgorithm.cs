@@ -2,25 +2,26 @@
 {
     internal class VigenereEncryption : BaseEncryptAlgorithm
     {
-        private string KeyValueGeneration(string KeyValue, int SourceLength)
+        private string KeyValueGeneration(string keyValue, int sourceLength)
         {
-            string UncutKeyValue = string.Concat(Enumerable.Repeat(KeyValue, SourceLength / 2));
-            string GeneratedKeyValue = UncutKeyValue.Substring(0, SourceLength);
-            return GeneratedKeyValue;
+            string uncutKeyValue = string.Concat(Enumerable.Repeat(keyValue, sourceLength / 2));
+            string generatedKeyValue = uncutKeyValue.Substring(0, sourceLength);
+            return generatedKeyValue;
         }
 
-        public override string Encryption(string SourceMessage, string[] KeyValues)
+        public override string Encryption(string sourceMessage, string[] keyValues)
         {
-            string EncryptedMessage = "";
-            string KeyValue = KeyValueGeneration(KeyValues[0], SourceMessage.Length);
-            for(int i = 0;i<SourceMessage.Length;i++)
+            string encryptedMessage = "";
+            string keyValue = KeyValueGeneration(keyValues[0], sourceMessage.Length);
+
+            for(int i = 0; i < sourceMessage.Length ;i++)
             {
-                int x = (SourceMessage[i] + KeyValue[i]) % 26;
+                int x = (sourceMessage[i] + keyValue[i]) % 26;
                 x += 'A';
 
-                EncryptedMessage += (char)(x);
+                encryptedMessage += (char)(x);
             }
-            return EncryptedMessage;
+            return encryptedMessage;
         }
     }
 }

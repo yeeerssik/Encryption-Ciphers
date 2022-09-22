@@ -86,10 +86,10 @@
             return keyMatrix;
         }
 
-        public override string Encryption(string SourceMessage, string[] KeyValues)
+        public override string Encryption(string sourceMessage, string[] keyValues)
         {
-            string EncryptedMessage = "";
-            Dictionary<char, string> square = generateSquare(KeyValues[0], EnglishAlphabet);
+            string encryptedMessage = "";
+            Dictionary<char, string> square = generateSquare(keyValues[0], EnglishAlphabet);
 
             List<char> someList = new List<char>();
             foreach (char c in square.Keys)
@@ -97,17 +97,17 @@
                 someList.Add(c);
             }
 
-            for (int i = 0; i < SourceMessage.Length; i++)
+            for (int i = 0; i < sourceMessage.Length; i++)
             {
-                EncryptedMessage += square[SourceMessage[i]];
+                encryptedMessage += square[sourceMessage[i]];
             }
-            string key = KeyValues[0];
-            List<string> keyMatrix = sortMatrix(EncryptedMessage, key);
+            string key = keyValues[0];
+            List<string> keyMatrix = sortMatrix(encryptedMessage, key);
             for (int i = 0; i < keyMatrix.Count; i++)
             {
-                EncryptedMessage += keyMatrix[i].Substring(1);
+                encryptedMessage += keyMatrix[i].Substring(1);
             }
-            return EncryptedMessage;
+            return encryptedMessage;
         }
     }
 }

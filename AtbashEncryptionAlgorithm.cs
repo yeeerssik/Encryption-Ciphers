@@ -8,34 +8,33 @@ namespace CryptoApp
 
         private const string RussianAlphabet = "абвгдзеёжзийклмнопрстуфхцчшщъыьэюя";
     
-        private string changedSymbol (char i, string Alphabet)
+        private string changedSymbol (char i, string alphabet)
         {
             string changedSymbol = (char.IsUpper(i) ?
-                                    (((!Alphabet.Contains(i)) ?
-                                        i : Alphabet[Alphabet.Length - Alphabet.IndexOf(i) - 1]).ToString()).ToUpper() :
-                                    (((!Alphabet.Contains(i)) ?
-                                        i : Alphabet[Alphabet.Length - Alphabet.IndexOf(i) - 1]).ToString()).ToLower());
+                                    (((!alphabet.Contains(i)) ?
+                                        i : alphabet[alphabet.Length - alphabet.IndexOf(i) - 1]).ToString()).ToUpper() :
+                                    (((!alphabet.Contains(i)) ?
+                                        i : alphabet[alphabet.Length - alphabet.IndexOf(i) - 1]).ToString()).ToLower());
 
             return changedSymbol;
         }
 
-        public override string Encryption(string SourceMessage, string[] KeyValue)
+        public override string Encryption(string sourceMessage, string[] keyValue)
         {
-            string EncryptedMessage = "";
+            string encryptedMessage = "";
 
-            if (!Regex.IsMatch(SourceMessage, @"/[\P{IsCyrillic}\P{Pc}]/gu")) 
+            if (!Regex.IsMatch(sourceMessage, @"/[\P{IsCyrillic}\P{Pc}]/gu")) 
             {
-                foreach (char i in SourceMessage)
+                foreach (char i in sourceMessage)
                 {
-                    EncryptedMessage += changedSymbol(i, RussianAlphabet);
-
+                    encryptedMessage += changedSymbol(i, RussianAlphabet);
                 }
             }
-            else if (!Regex.IsMatch(SourceMessage, @"/[\P{IsBasicLatin}\P{Pc}]/gu"))
+            else if (!Regex.IsMatch(sourceMessage, @"/[\P{IsBasicLatin}\P{Pc}]/gu"))
             {
-                foreach (char i in SourceMessage)
+                foreach (char i in sourceMessage)
                 {
-                    EncryptedMessage += changedSymbol(i, EnglishAlphabet);
+                    encryptedMessage += changedSymbol(i, EnglishAlphabet);
                 }
             }
             else
@@ -43,7 +42,7 @@ namespace CryptoApp
                 return "Пожалуйста, используйте кириллицу или латиницу!";
             }
             
-            return EncryptedMessage;
+            return encryptedMessage;
         }
     }
 }

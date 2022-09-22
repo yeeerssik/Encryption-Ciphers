@@ -7,7 +7,7 @@ namespace CryptoApp
         private const string EnglishAlphabet = "abcdefghijklmnopqrstuvwxyz";
 
         private const string RussianAlphabet = "абвгдзеёжзийклмнопрстуфхцчшщъыьэюя";
-        static int[,] GetKeyMatrix(string key, string Alphabet)
+        static int[,] GetKeyMatrix(string key, string alphabet)
         {
             int sqrtKey = (int)Math.Sqrt(key.Length);
             int[,] keyMatrix = new int[sqrtKey, sqrtKey];
@@ -17,7 +17,7 @@ namespace CryptoApp
             {
                 for (int j = 0; j < sqrtKey; j++)
                 {
-                    keyMatrix[i, j] = Array.IndexOf(Alphabet.ToArray(), key[k]);
+                    keyMatrix[i, j] = Array.IndexOf(alphabet.ToArray(), key[k]);
                     k++;
                 }
             }
@@ -25,7 +25,7 @@ namespace CryptoApp
             return keyMatrix;
         }
 
-        static int[,] GetMessageMatrix(string key, string msg, string Alphabet)
+        static int[,] GetMessageMatrix(string key, string msg, string alphabet)
         {
             int sqrtKey = (int)Math.Sqrt(key.Length);
             int msgCol;
@@ -57,7 +57,7 @@ namespace CryptoApp
                 {
                     if (k > 0)
                     {
-                        messageMatrix[j, i] = Array.IndexOf(Alphabet.ToArray(), fullMsg[fullMsg.Length - k]);
+                        messageMatrix[j, i] = Array.IndexOf(alphabet.ToArray(), fullMsg[fullMsg.Length - k]);
                         k--;
                     }
                 }
@@ -65,7 +65,7 @@ namespace CryptoApp
             return messageMatrix;
         }
 
-        static string BaseEncrypt(int[,] key, int[,] message, string Alphabet)
+        static string BaseEncrypt(int[,] key, int[,] message, string alphabet)
         {
             int temp;
             string cipherText = "";
@@ -82,48 +82,48 @@ namespace CryptoApp
                         temp += key[i, k] * message[k, j];
                     }
 
-                    cipher[i, j] = temp % Alphabet.Length;
+                    cipher[i, j] = temp % alphabet.Length;
                 }
             }
             for (int i = 0; i < cipher.GetLength(1); i++)
             {
                 for (int j = 0; j < cipher.GetLength(0); j++)
                 {
-                    cipherText += Alphabet.ToArray()[cipher[j, i]];
+                    cipherText += alphabet.ToArray()[cipher[j, i]];
                 }
             }
 
             return cipherText;
         }
 
-        public override string Encryption(string SourceMessage, string[] KeyValues)
+        public override string Encryption(string sourceMessage, string[] keyValues)
         {
-            string EncryptedMessage = "";
-            if ((Math.Sqrt(KeyValues[0].Length) % 1) == 0)
+            string encryptedMessage = "";
+            if ((Math.Sqrt(keyValues[0].Length) % 1) == 0)
             {
-                if (Regex.IsMatch(SourceMessage, @"^[а-я]+$"))
+                if (Regex.IsMatch(sourceMessage, @"^[а-я]+$"))
                 {
-                    int[,] keyMatrix = GetKeyMatrix(KeyValues[0], RussianAlphabet);
-                    int[,] messageMatrix = GetMessageMatrix(KeyValues[0], SourceMessage, RussianAlphabet);
-                    EncryptedMessage = BaseEncrypt(keyMatrix, messageMatrix, RussianAlphabet); 
+                    int[,] keyMatrix = GetKeyMatrix(keyValues[0], RussianAlphabet);
+                    int[,] messageMatrix = GetMessageMatrix(keyValues[0], sourceMessage, RussianAlphabet);
+                    encryptedMessage = BaseEncrypt(keyMatrix, messageMatrix, RussianAlphabet); 
                 }
-                else if (Regex.IsMatch(SourceMessage, @"^[a-z]+$"))
+                else if (Regex.IsMatch(sourceMessage, @"^[a-z]+$"))
                 {
-                    int[,] keyMatrix = GetKeyMatrix(KeyValues[0], EnglishAlphabet);
-                    int[,] messageMatrix = GetMessageMatrix(KeyValues[0], SourceMessage, EnglishAlphabet);
-                    EncryptedMessage = BaseEncrypt(keyMatrix, messageMatrix, EnglishAlphabet);
+                    int[,] keyMatrix = GetKeyMatrix(keyValues[0], EnglishAlphabet);
+                    int[,] messageMatrix = GetMessageMatrix(keyValues[0], sourceMessage, EnglishAlphabet);
+                    encryptedMessage = BaseEncrypt(keyMatrix, messageMatrix, EnglishAlphabet);
                 }
                 else
                 {
-                    EncryptedMessage = "Пожалуйста, используйте кириллицу или латиницу!";
+                    encryptedMessage = "Пожалуйста, используйте кириллицу или латиницу!";
                 }
             }
             else
             {
-                EncryptedMessage = "Ключевое значение должно являтся полным квадратом целого числа!";
+                encryptedMessage = "Ключевое значение должно являтся полным квадратом целого числа!";
             }
             
-            return EncryptedMessage;
+            return encryptedMessage;
         }
     }
 }

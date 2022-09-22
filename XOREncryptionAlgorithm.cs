@@ -4,11 +4,11 @@ namespace CryptoApp
 {
     internal class XOREncryption : BaseEncryptAlgorithm
     {
-        private string KeyValueGeneration(string KeyValue, int SourceLength)
+        private string KeyValueGeneration(string keyValue, int SourceLength)
         {
-            string UncutKeyValue = string.Concat(Enumerable.Repeat(KeyValue, SourceLength / 2));
-            string GeneratedKeyValue = UncutKeyValue.Substring(0, SourceLength);
-            return GeneratedKeyValue;
+            string uncutKeyValue = string.Concat(Enumerable.Repeat(keyValue, SourceLength / 2));
+            string generatedKeyValue = uncutKeyValue.Substring(0, SourceLength);
+            return generatedKeyValue;
         }
 
         public static String ToBinary(string str)
@@ -16,33 +16,33 @@ namespace CryptoApp
             Byte[] data = Encoding.ASCII.GetBytes(str);
             return string.Join("", data.Select(byt => Convert.ToString(byt, 2).PadLeft(8, '0')));
         }
-        public string GetBinaryData(string CryptedMessage, string[] KeyValues)
+        public string GetBinaryData(string sourceMessage, string[] KeyValues)
         {
-            string DecryptedMessage = "";
-            string keyValue = KeyValueGeneration(KeyValues[0], CryptedMessage.Length);
+            string binaryData = "";
+            string keyValue = KeyValueGeneration(KeyValues[0], sourceMessage.Length);
             string binaryKey = ToBinary(keyValue);
-            string binaryMsg = ToBinary(CryptedMessage);
+            string binaryMsg = ToBinary(sourceMessage);
 
             for (int i = 0; i < binaryMsg.Length; i++)
             {
-                DecryptedMessage += (binaryKey[i] ^ binaryMsg[i]);
+                binaryData += (binaryKey[i] ^ binaryMsg[i]);
             }
 
-            return DecryptedMessage;
+            return binaryData;
         }
 
-        public override string Encryption(string SourceMessage, string[] KeyValues)
+        public override string Encryption(string sourceMessage, string[] keyValues)
         {
-            string EncryptedMessage = "";
+            string encryptedMessage = "";
 
-            string keyValue = KeyValueGeneration(KeyValues[0], SourceMessage.Length);
+            string keyValue = KeyValueGeneration(keyValues[0], sourceMessage.Length);
 
-            for (int i = 0; i < SourceMessage.Length; i++)
+            for (int i = 0; i < sourceMessage.Length; i++)
             {
-                EncryptedMessage += char.ToString((char)(SourceMessage[i] ^ keyValue[i]));
+                encryptedMessage += char.ToString((char)(sourceMessage[i] ^ keyValue[i]));
             }
 
-            return EncryptedMessage;
+            return encryptedMessage;
         }
     }
 }
