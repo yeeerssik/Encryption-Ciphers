@@ -14,19 +14,6 @@ namespace CryptoApp
             string GeneratedKeyValue = UncutKeyValue.Substring(0, SourceLength);
             return GeneratedKeyValue;
         }
-        //public override string Decryption(string CryptedMessage, string[] KeyValues)
-        //{
-        //    string DecryptedMessage = "";
-        //    string KeyValue = KeyValueGeneration(KeyValues[0], CryptedMessage.Length);
-        //    for (int i = 0; i < CryptedMessage.Length;i++)
-        //    {
-        //        int x = (CryptedMessage[i] - KeyValue[i] + 26) % 26;
-        //        x += 'A';
-
-        //        DecryptedMessage += (char)(x);
-        //    }
-        //    return DecryptedMessage;
-        //}
 
         public override string Encryption(string SourceMessage, string[] KeyValues)
         {

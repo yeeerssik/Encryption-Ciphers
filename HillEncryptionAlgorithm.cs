@@ -101,12 +101,6 @@ namespace CryptoApp
             return cipherText;
         }
 
-
-        //public override string Decryption(string CryptedMessage, string[] KeyValues)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
         public override string Encryption(string SourceMessage, string[] KeyValues)
         {
             string EncryptedMessage = "";

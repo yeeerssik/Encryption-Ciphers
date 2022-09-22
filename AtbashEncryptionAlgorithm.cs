@@ -23,30 +23,6 @@ namespace CryptoApp
 
             return changedSymbol;
         }
-        //public override string Decryption(string CryptedMessage, string[] KeyValues)
-        //{
-        //    string DecryptedMessage = "";
-
-        //    if (!Regex.IsMatch(CryptedMessage, @"/[\P{IsCyrillic}\P{Pc}]/gu"))
-        //    {
-        //        foreach (char i in CryptedMessage)
-        //        {
-        //            DecryptedMessage += changedSymbol(i, RussianAlphabet);
-        //        }
-        //    }
-        //    else if (!Regex.IsMatch(CryptedMessage, @"/[\P{IsBasicLatin}\P{Pc}]/gu"))
-        //    {
-        //        foreach (char i in CryptedMessage)
-        //        {
-        //            DecryptedMessage += changedSymbol(i, EnglishAlphabet);
-        //        }
-        //    }
-        //    else
-        //    {
-        //        return "Пожалуйста, используйте кириллицу или латиницу!";
-        //    }
-        //    return DecryptedMessage;
-        //}
 
         public override string Encryption(string SourceMessage, string[] KeyValue)
         {
