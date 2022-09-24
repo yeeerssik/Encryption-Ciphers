@@ -23,25 +23,20 @@ namespace CryptoApp
         {
             string encryptedMessage = "";
 
-            if (!Regex.IsMatch(sourceMessage, @"/[\P{IsCyrillic}\P{Pc}]/gu")) 
+            if (!Regex.IsMatch(sourceMessage, @"/[\P{IsCyrillic}\P{Pc}]/gu"))
             {
-                foreach (char i in sourceMessage)
+                foreach (char c in sourceMessage)
                 {
-                    encryptedMessage += changedSymbol(i, RussianAlphabet);
+                    encryptedMessage += changedSymbol(c, RussianAlphabet);
                 }
             }
             else if (!Regex.IsMatch(sourceMessage, @"/[\P{IsBasicLatin}\P{Pc}]/gu"))
             {
-                foreach (char i in sourceMessage)
+                foreach (char c in sourceMessage)
                 {
-                    encryptedMessage += changedSymbol(i, EnglishAlphabet);
+                    encryptedMessage += changedSymbol(c, EnglishAlphabet);
                 }
             }
-            else
-            {
-                return "Пожалуйста, используйте кириллицу или латиницу!";
-            }
-            
             return encryptedMessage;
         }
     }

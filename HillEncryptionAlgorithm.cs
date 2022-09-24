@@ -85,9 +85,9 @@ namespace CryptoApp
                     cipher[i, j] = temp % alphabet.Length;
                 }
             }
-            for (int i = 0; i < cipher.GetLength(1); i++)
+            for (int i = 0; i<key.GetLength(0); i++)
             {
-                for (int j = 0; j < cipher.GetLength(0); j++)
+                for (int j = 0; j<key.GetLength(1); j++)
                 {
                     cipherText += alphabet.ToArray()[cipher[j, i]];
                 }

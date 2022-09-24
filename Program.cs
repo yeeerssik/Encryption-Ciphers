@@ -7,10 +7,10 @@ namespace CryptoApp
     {
         public static void Main(string[] Args)
         {
-            string[] keyArray = { "gybnglfld" };
+            string[] keyArray = { "люди" };
             HillEncryption test = new();
-            Console.WriteLine(test.Encryption("hello", keyArray));
-            //Console.WriteLine(test.Decryption("FFDFGXGXXXGXFFGXXXDF", keyArray));
+            Console.WriteLine(test.Encryption("приветмир", keyArray));
+            //Console.WriteLine(test.GetBinaryData("fuck", keyArray));
 
         }
     }
